@@ -19,7 +19,7 @@
         "name": "Jimmy Pitts",
         "email": "jimmyrp@gmail.com"
       },
-      "source": "plugins/ralph-it",
+      "source": "./plugins/ralph-it",
       "category": "development"
     }
   ]
