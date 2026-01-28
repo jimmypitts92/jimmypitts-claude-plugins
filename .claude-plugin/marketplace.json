@@ -1,0 +1,26 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "jimmypitts-claude-plugins",
+  "description": "A curated collection of Claude plugins for enhanced development workflows",
+  "version": "1.0.0",
+  "owner": {
+    "name": "Jimmy Pitts",
+    "username": "jimmypitts92",
+    "email": "jimmyrp@gmail.com"
+  },
+  "repository": "https://github.com/jimmypitts92/jimmypitts-claude-plugins",
+  "updated": "2026-01-28",
+  "plugins": [
+    {
+      "name": "ralph-it",
+      "version": "1.0.0",
+      "description": "Implementation of the Ralph Wiggum technique - continuous self-referential AI loops for interactive iterative development. Run Claude in a while-true loop with the same prompt until task completion.",
+      "author": {
+        "name": "Jimmy Pitts",
+        "email": "jimmyrp@gmail.com"
+      },
+      "source": "./plugins/ralph-it",
+      "category": "development"
+    }
+  ]
+}

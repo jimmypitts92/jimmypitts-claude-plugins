@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Ralph Wiggum Stop Hook
-# Prevents session exit when a ralph-loop is active
+# Prevents session exit when a ralph-it loop is active
 # Feeds Claude's output back as input to continue the loop
 
 set -euo pipefail
@@ -9,8 +9,8 @@ set -euo pipefail
 # Read hook input from stdin (advanced stop hook API)
 HOOK_INPUT=$(cat)
 
-# Check if ralph-loop is active
-RALPH_STATE_FILE=".claude/ralph-loop.local.md"
+# Check if ralph-it loop is active
+RALPH_STATE_FILE=".claude/ralph-it.local.md"
 
 if [[ ! -f "$RALPH_STATE_FILE" ]]; then
   # No active loop - allow exit
@@ -33,7 +33,7 @@ if [[ ! "$ITERATION" =~ ^[0-9]+$ ]]; then
   echo "   Problem: 'iteration' field is not a valid number (got: '$ITERATION')" >&2
   echo "" >&2
   echo "   This usually means the state file was manually edited or corrupted." >&2
-  echo "   Ralph loop is stopping. Run /ralph-loop again to start fresh." >&2
+  echo "   Ralph loop is stopping. Run /ralph-it again to start fresh." >&2
   rm "$RALPH_STATE_FILE"
   exit 0
 fi
@@ -44,7 +44,7 @@ if [[ ! "$MAX_ITERATIONS" =~ ^[0-9]+$ ]]; then
   echo "   Problem: 'max_iterations' field is not a valid number (got: '$MAX_ITERATIONS')" >&2
   echo "" >&2
   echo "   This usually means the state file was manually edited or corrupted." >&2
-  echo "   Ralph loop is stopping. Run /ralph-loop again to start fresh." >&2
+  echo "   Ralph loop is stopping. Run /ralph-it again to start fresh." >&2
   rm "$RALPH_STATE_FILE"
   exit 0
 fi
@@ -141,7 +141,7 @@ if [[ -z "$PROMPT_FILE" ]]; then
   echo "     • State file was created with old version" >&2
   echo "     • File was manually edited" >&2
   echo "" >&2
-  echo "   Ralph loop is stopping. Run /ralph-loop again to start fresh." >&2
+  echo "   Ralph loop is stopping. Run /ralph-it again to start fresh." >&2
   rm "$RALPH_STATE_FILE"
   exit 0
 fi

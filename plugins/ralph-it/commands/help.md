@@ -31,14 +31,14 @@ The technique is described as "deterministically bad in an undeterministic world
 
 ## Available Commands
 
-### /ralph-loop PROMPT_FILE [OPTIONS]
+### /ralph-it PROMPT_FILE [OPTIONS]
 
 Start a Ralph loop in your current session.
 
 **Usage:**
 ```
-/ralph-loop prompts/refactor.md --max-iterations 20
-/ralph-loop tasks/add-tests.txt --completion-promise "TESTS COMPLETE"
+/ralph-it prompts/refactor.md --max-iterations 20
+/ralph-it tasks/add-tests.txt --completion-promise "TESTS COMPLETE"
 ```
 
 **Arguments:**
@@ -49,7 +49,7 @@ Start a Ralph loop in your current session.
 - `--completion-promise <text>` - Promise phrase to signal completion
 
 **How it works:**
-1. Creates `.claude/.ralph-loop.local.md` state file with prompt file path
+1. Creates `.claude/.ralph-it.local.md` state file with prompt file path
 2. You work on the task
 3. When you try to exit, stop hook intercepts
 4. Stop hook reads the prompt file and feeds it back
@@ -58,19 +58,18 @@ Start a Ralph loop in your current session.
 
 ---
 
-### /ralphify PROMPT_TEXT or --file FILE [OPTIONS]
+### /ralphify --file FILE [OPTIONS]
 
 Transform a simple prompt into a Ralph-optimized structured prompt.
 
 **Usage:**
 ```
-/ralphify "Build a REST API for todos"
 /ralphify --file rough-prompt.txt --output optimized.md
 /ralphify --file draft.txt --promise "DONE" --output final.md
 ```
 
 **Arguments:**
-- `PROMPT_TEXT` - Direct prompt text (if not using --file)
+- `--file <path>` - Read prompt from file (required)
 
 **Options:**
 - `--file <path>` - Read prompt from file
@@ -88,11 +87,14 @@ Transforms your prompt by adding:
 
 **Example workflow:**
 ```
-# 1. Optimize your prompt
-/ralphify "Fix the auth bug" --output prompts/fix-auth.md --promise "FIXED"
+# 1. Create a rough prompt
+echo "Fix the auth bug" > rough-prompt.md
 
-# 2. Run the Ralph loop
-/ralph-loop prompts/fix-auth.md --completion-promise "FIXED" --max-iterations 20
+# 2. Optimize your prompt
+/ralphify --file rough-prompt.md --output prompts/fix-auth.md --promise "FIXED"
+
+# 3. Run the Ralph loop
+/ralph-it prompts/fix-auth.md --completion-promise "FIXED" --max-iterations 20
 ```
 
 ---
@@ -108,7 +110,7 @@ Cancel an active Ralph loop (removes the loop state file).
 
 **How it works:**
 - Checks for active loop state file
-- Removes `.claude/.ralph-loop.local.md`
+- Removes `.claude/.ralph-it.local.md`
 - Reports cancellation with iteration count
 
 ---
@@ -154,7 +156,7 @@ Fix the token refresh logic in auth.ts. Output <promise>FIXED</promise> when all
 
 Then run:
 ```
-/ralph-loop tasks/fix-auth.md --completion-promise "FIXED" --max-iterations 10
+/ralph-it tasks/fix-auth.md --completion-promise "FIXED" --max-iterations 10
 ```
 
 You'll see Ralph:

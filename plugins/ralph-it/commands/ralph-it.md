@@ -1,16 +1,16 @@
 ---
 description: "Start Ralph Wiggum loop in current session"
 argument-hint: "PROMPT_FILE [--max-iterations N] [--completion-promise TEXT]"
-allowed-tools: ["Bash(${CLAUDE_PLUGIN_ROOT}/scripts/setup-ralph-loop.sh:*)"]
+allowed-tools: ["Bash(${CLAUDE_PLUGIN_ROOT}/scripts/setup-ralph-it.sh:*)"]
 hide-from-slash-command-tool: "true"
 ---
 
-# Ralph Loop Command
+# Ralph It Command
 
 Execute the setup script to initialize the Ralph loop:
 
 ```!
-"${CLAUDE_PLUGIN_ROOT}/scripts/setup-ralph-loop.sh" $ARGUMENTS
+"${CLAUDE_PLUGIN_ROOT}/scripts/setup-ralph-it.sh" $ARGUMENTS
 ```
 
 Please work on the task. When you try to exit, the Ralph loop will feed the prompt from the file back to you for the next iteration. You'll see your previous work in files and git history, allowing you to iterate and improve.

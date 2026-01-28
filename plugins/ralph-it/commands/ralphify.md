@@ -1,6 +1,6 @@
 ---
 description: "Reformat a prompt to be better suited for Ralph loops"
-argument-hint: "PROMPT_TEXT or --file PROMPT_FILE [--output OUTPUT_FILE] [--promise TEXT]"
+argument-hint: "--file PROMPT_FILE [--output OUTPUT_FILE] [--promise TEXT]"
 allowed-tools: ["Bash(${CLAUDE_PLUGIN_ROOT}/scripts/ralphify.sh:*)"]
 hide-from-slash-command-tool: "true"
 ---

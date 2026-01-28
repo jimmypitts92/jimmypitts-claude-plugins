@@ -18,7 +18,7 @@ while [[ $# -gt 0 ]]; do
 Ralph Loop - Interactive self-referential development loop
 
 USAGE:
-  /ralph-loop PROMPT_FILE [OPTIONS]
+  /ralph-it PROMPT_FILE [OPTIONS]
 
 ARGUMENTS:
   PROMPT_FILE    Path to file containing the prompt for the loop
@@ -41,10 +41,10 @@ DESCRIPTION:
   - Learning how Ralph works
 
 EXAMPLES:
-  /ralph-loop prompt.md --completion-promise 'DONE' --max-iterations 20
-  /ralph-loop --max-iterations 10 tasks/fix-auth.md
-  /ralph-loop prompts/refactor.txt  (runs forever)
-  /ralph-loop --completion-promise 'TASK COMPLETE' todo-api.md
+  /ralph-it prompt.md --completion-promise 'DONE' --max-iterations 20
+  /ralph-it --max-iterations 10 tasks/fix-auth.md
+  /ralph-it prompts/refactor.txt  (runs forever)
+  /ralph-it --completion-promise 'TASK COMPLETE' todo-api.md
 
 STOPPING:
   Only by reaching --max-iterations or detecting --completion-promise
@@ -52,10 +52,10 @@ STOPPING:
 
 MONITORING:
   # View current iteration:
-  grep '^iteration:' .claude/ralph-loop.local.md
+  grep '^iteration:' .claude/ralph-it.local.md
 
   # View full state:
-  head -10 .claude/ralph-loop.local.md
+  head -10 .claude/ralph-it.local.md
 HELP_EOF
       exit 0
       ;;
@@ -125,11 +125,11 @@ if [[ -z "$PROMPT_FILE" ]]; then
   echo "   Ralph needs a prompt file to work from." >&2
   echo "" >&2
   echo "   Examples:" >&2
-  echo "     /ralph-loop prompt.md" >&2
-  echo "     /ralph-loop tasks/fix-auth.md --max-iterations 20" >&2
-  echo "     /ralph-loop --completion-promise 'DONE' prompts/refactor.txt" >&2
+  echo "     /ralph-it prompt.md" >&2
+  echo "     /ralph-it tasks/fix-auth.md --max-iterations 20" >&2
+  echo "     /ralph-it --completion-promise 'DONE' prompts/refactor.txt" >&2
   echo "" >&2
-  echo "   For all options: /ralph-loop --help" >&2
+  echo "   For all options: /ralph-it --help" >&2
   exit 1
 fi
 
@@ -165,7 +165,7 @@ else
   COMPLETION_PROMISE_YAML="null"
 fi
 
-cat > .claude/ralph-loop.local.md <<EOF
+cat > .claude/ralph-it.local.md <<EOF
 ---
 active: true
 iteration: 1
@@ -189,7 +189,7 @@ The stop hook is now active. When you try to exit, the prompt from the file
 will be fed back to you. You'll see your previous work in files, creating a
 self-referential loop where you iteratively improve on the same task.
 
-To monitor: head -10 .claude/ralph-loop.local.md
+To monitor: head -10 .claude/ralph-it.local.md
 
 ⚠️  WARNING: This loop cannot be stopped manually! It will run infinitely
     unless you set --max-iterations or --completion-promise.

@@ -14,7 +14,7 @@ This plugin implements Ralph using a **Stop hook** that intercepts Claude's exit
 
 ```bash
 # You run ONCE:
-/ralph-loop prompt.md --completion-promise "DONE"
+/ralph-it prompt.md --completion-promise "DONE"
 
 # Then Claude Code automatically:
 # 1. Works on the task
@@ -38,11 +38,14 @@ This creates a **self-referential feedback loop** where:
 ### Option 1: Use /ralphify to optimize your prompt
 
 ```bash
+# First, create a rough prompt file
+echo "Build a REST API for todos with CRUD operations" > rough-prompt.md
+
 # Let Claude optimize your prompt
-/ralphify "Build a REST API for todos with CRUD operations" --output prompt.md --promise "COMPLETE"
+/ralphify --file rough-prompt.md --output prompt.md --promise "COMPLETE"
 
 # Then start the loop
-/ralph-loop prompt.md --completion-promise "COMPLETE" --max-iterations 50
+/ralph-it prompt.md --completion-promise "COMPLETE" --max-iterations 50
 ```
 
 ### Option 2: Write your own prompt file
@@ -55,7 +58,7 @@ Build a REST API for todos. Requirements: CRUD operations, input validation, tes
 Then run:
 
 ```bash
-/ralph-loop prompt.md --completion-promise "COMPLETE" --max-iterations 50
+/ralph-it prompt.md --completion-promise "COMPLETE" --max-iterations 50
 ```
 
 Claude will:
@@ -67,13 +70,13 @@ Claude will:
 
 ## Commands
 
-### /ralph-loop
+### /ralph-it
 
 Start a Ralph loop in your current session.
 
 **Usage:**
 ```bash
-/ralph-loop PROMPT_FILE --max-iterations <n> --completion-promise "<text>"
+/ralph-it PROMPT_FILE --max-iterations <n> --completion-promise "<text>"
 ```
 
 **Arguments:**
@@ -89,13 +92,12 @@ Transform a simple prompt into a structured Ralph-optimized prompt.
 
 **Usage:**
 ```bash
-/ralphify "Your prompt text"
 /ralphify --file prompt.txt --output optimized-prompt.md
 /ralphify --file rough.txt --promise "COMPLETE" --output final.md
 ```
 
 **Arguments:**
-- `PROMPT_TEXT` - Direct prompt text (if not using --file)
+- `--file <path>` - Read prompt from file (required)
 
 **Options:**
 - `--file <path>` - Read prompt from file
@@ -124,7 +126,11 @@ Cancel the active Ralph loop.
 **TIP:** Use `/ralphify` to automatically optimize your prompts according to these best practices!
 
 ```bash
-/ralphify "Your rough idea" --output optimized-prompt.md
+# Create a rough prompt file first
+echo "Your rough idea" > rough-idea.md
+
+# Then optimize it
+/ralphify --file rough-idea.md --output optimized-prompt.md
 ```
 
 ### 1. Clear Completion Criteria
@@ -187,7 +193,7 @@ Always use `--max-iterations` as a safety net to prevent infinite loops on impos
 
 ```bash
 # Recommended: Always set a reasonable iteration limit
-/ralph-loop prompt.md --max-iterations 20
+/ralph-it prompt.md --max-iterations 20
 ```
 
 In your prompt file, include what to do if stuck:
@@ -207,12 +213,12 @@ After 15 iterations, if not complete:
 
 ### Example 1: Simple Task
 
-**Before ralphify:**
+**Before ralphify (rough-prompt.md):**
 ```
 Build a todo API
 ```
 
-**After `/ralphify "Build a todo API" --promise "COMPLETE"`:**
+**After `/ralphify --file rough-prompt.md --promise "COMPLETE"`:**
 ```markdown
 # Task: Build Todo API
 
@@ -262,12 +268,12 @@ Output `<promise>COMPLETE</promise>` when:
 
 ### Example 2: Bug Fix
 
-**Before ralphify:**
+**Before ralphify (bug-fix-prompt.md):**
 ```
 Fix the memory leak in the cache module
 ```
 
-**After `/ralphify "Fix the memory leak in the cache module" --promise "FIXED"`:**
+**After `/ralphify --file bug-fix-prompt.md --promise "FIXED"`:**
 ```markdown
 # Task: Fix Memory Leak in Cache Module
 
