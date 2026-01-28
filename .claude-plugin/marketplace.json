@@ -13,13 +13,13 @@
   "plugins": [
     {
       "name": "ralph-it",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "description": "Implementation of the Ralph Wiggum technique - continuous self-referential AI loops for interactive iterative development. Run Claude in a while-true loop with the same prompt until task completion.",
       "author": {
         "name": "Jimmy Pitts",
         "email": "jimmyrp@gmail.com"
       },
-      "source": "./plugins/ralph-it",
+      "source": "plugins/ralph-it",
       "category": "development"
     }
   ]

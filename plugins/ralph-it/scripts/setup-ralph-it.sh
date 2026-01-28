@@ -26,6 +26,7 @@ ARGUMENTS:
 OPTIONS:
   --max-iterations <n>           Maximum iterations before auto-stop (default: unlimited)
   --completion-promise '<text>'  Promise phrase (USE QUOTES for multi-word)
+  --promise '<text>'             Shorthand for --completion-promise
   -h, --help                     Show this help message
 
 DESCRIPTION:
@@ -41,7 +42,7 @@ DESCRIPTION:
   - Learning how Ralph works
 
 EXAMPLES:
-  /ralph-it prompt.md --completion-promise 'DONE' --max-iterations 20
+  /ralph-it prompt.md --promise 'DONE' --max-iterations 20
   /ralph-it --max-iterations 10 tasks/fix-auth.md
   /ralph-it prompts/refactor.txt  (runs forever)
   /ralph-it --completion-promise 'TASK COMPLETE' todo-api.md
@@ -85,16 +86,16 @@ HELP_EOF
       MAX_ITERATIONS="$2"
       shift 2
       ;;
-    --completion-promise)
+    --completion-promise|--promise)
       if [[ -z "${2:-}" ]]; then
-        echo "❌ Error: --completion-promise requires a text argument" >&2
+        echo "❌ Error: --completion-promise (or --promise) requires a text argument" >&2
         echo "" >&2
         echo "   Valid examples:" >&2
-        echo "     --completion-promise 'DONE'" >&2
+        echo "     --promise 'DONE'" >&2
         echo "     --completion-promise 'TASK COMPLETE'" >&2
-        echo "     --completion-promise 'All tests passing'" >&2
+        echo "     --promise 'All tests passing'" >&2
         echo "" >&2
-        echo "   You provided: --completion-promise (with no text)" >&2
+        echo "   You provided: $1 (with no text)" >&2
         echo "" >&2
         echo "   Note: Multi-word promises must be quoted!" >&2
         exit 1
