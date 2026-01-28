@@ -2,7 +2,7 @@
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "jimmypitts-claude-plugins",
   "description": "A curated collection of Claude plugins for enhanced development workflows",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "owner": {
     "name": "Jimmy Pitts",
     "username": "jimmypitts92",
