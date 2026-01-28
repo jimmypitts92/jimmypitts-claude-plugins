@@ -82,8 +82,10 @@ Transforms your prompt by adding:
 - Verification/testing after each step
 - Self-correction loops ("if tests fail, fix and retry")
 - Explicit completion criteria
-- Completion promise tags (`<promise>TEXT</promise>`)
+- **Instructions to output completion promise tags** (`<promise>TEXT</promise>`) - CRITICAL!
 - Fallback behavior for being stuck
+
+**IMPORTANT**: The ralphified prompt will ALWAYS include explicit instructions to output the completion promise. This ensures Claude knows exactly when and how to signal completion of the Ralph loop.
 
 **Example workflow:**
 ```

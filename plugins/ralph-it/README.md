@@ -109,8 +109,10 @@ Transform a simple prompt into a structured Ralph-optimized prompt.
 - Includes verification and testing steps
 - Adds self-correction loops
 - Adds explicit completion criteria
-- Adds completion promise tags
+- **ALWAYS adds instructions to output the completion promise** (critical!)
 - Adds fallback behavior for when stuck
+
+**IMPORTANT**: The ralphified prompt will always include explicit instructions for Claude to output the completion promise when the task is complete. This is essential for the Ralph loop to know when to stop.
 
 ### /cancel-ralph
 
